@@ -1,26 +1,181 @@
-@import "tailwindcss";
+/* Reset default styles with modern approach */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Base styles with modern typography and variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --primary-color: #0a66c2;
+  --secondary-color: #121826;
+  --background-color: #0d1117;
+  --container-bg: #161b22;
+  --text-color: #e6edf3;
+  --border-color: #30363d;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  --transition: all 0.3s ease-in-out;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0a66c2, #121826, #0d1117);
+  background-size: 400% 400%;
+  animation: gradientAnimation 15s infinite alternate ease-in-out;
+  color: var(--text-color);
+  line-height: 1.7;
+  padding: clamp(1rem, 4vw, 2.5rem);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Headings with modern look */
+h1, h2 {
+  color: var(--text-color);
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+/* Container with modern card-like styling */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: var(--container-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: var(--transition);
+}
+
+.container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Form elements with modern styling */
+textarea {
+  width: 100%;
+  padding: 0.875rem;
+  margin-top: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 120px;
+  transition: var(--transition);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(10, 102, 194, 0.4);
+}
+
+input[type="file"] {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px dashed var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--container-bg);
+  transition: var(--transition);
+  color: var(--text-color);
+}
+
+input[type="file"]:hover {
+  border-color: var(--primary-color);
+  background: rgba(10, 102, 194, 0.1);
+}
+
+/* Button with modern effects */
+button {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 0.75rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  background: #084c99;
+  transform: translateY(-2px);
+}
+
+/* Summary section with subtle animation */
+.summary {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: var(--container-bg);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.3s ease-in;
+  border: 1px solid var(--border-color);
+}
+
+.summary p {
+  font-size: 1.125rem;
+  color: var(--text-color);
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+  }
+  
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+  }
+  
+  h2 {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+  
+  button {
+    width: 100%;
+  }
 }
