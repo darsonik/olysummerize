@@ -72,6 +72,7 @@ h3 {
 .essence {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  align-items: center;
 }
 
 /* Glassmorphism container */
