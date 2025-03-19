@@ -177,7 +177,7 @@ button:hover::before {
 /* Summary section with subtle fade-in animation */
 .summary {
   line-height: 1.7;
-  padding: 1.25rem 1.25rem 1.25rem 2.5rem; /* More padding on the left */
+  padding: 1.25rem 2.5rem 1.25rem 2.5rem; /* More padding on the left */
   background: rgba(13, 17, 23, 0.40);
   border-radius: 0.75rem;
   border: 1px solid var(--border-color);
@@ -191,7 +191,7 @@ button:hover::before {
 }
 
 .summary p {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .summary em {
