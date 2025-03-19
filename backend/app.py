@@ -10,7 +10,7 @@ app = Flask(__name__)
 MISTRAL_API_KEY = os.getenv("MISTRAL_API")
 API_URL = "https://api.mistral.ai/v1/chat/completions"  # Updated endpoint
 
-def summarize_text(text, summary_length='short'):
+def summarize_text(text, summary_length='default'):
     if not MISTRAL_API_KEY:
         return "Error: MISTRAL_API_KEY not set in environment variables."
     
@@ -21,20 +21,20 @@ def summarize_text(text, summary_length='short'):
     
     # Map summary_length to approximate token counts or instructions
     length_instruction = {
-        "short": "Summarize using bullet points.",
+        "default": "Summarize and explain the important details.",
         "medium": "Summarize in 3-4 sentences.",
-        "long": "Summarize in a paragraph."
-    }.get(summary_length, "Summarize using bullet points.")
+        "long": "Summarize and explain in a paragraph."
+    }.get(summary_length, "Summarize and explain the important details.")
     
     # Prompt for summarization
-    prompt = f"{length_instruction} Here is the text to summarize:\n\n{text}"
+    prompt = f"{length_instruction} Here is the text to summarize within 300 words:\n\n{text}"
     
     data = {
         "model": "mistral-large-latest",  # Replace with desired model
         "messages": [
             {"role": "user", "content": prompt}
         ],
-        "max_tokens": 500,  # Adjust based on desired length
+        "max_tokens": 1500,  # Adjust based on desired length
         "temperature": 0.7
     }
 
@@ -53,13 +53,13 @@ def summarize():
         return jsonify({"error": "Missing 'text' in request body"}), 400
     
     text = data.get("text", "")
-    summary_length = data.get("summary_length", "long")
+    summary_length = data.get("summary_length", "default")
     
     if not text:
         return jsonify({"error": "Text cannot be empty"}), 400
     
     summary = summarize_text(text, summary_length)
-    return jsonify({"summary": summary})
+    return jsonify({"summary": summary, "summary_length": summary_length})
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)
